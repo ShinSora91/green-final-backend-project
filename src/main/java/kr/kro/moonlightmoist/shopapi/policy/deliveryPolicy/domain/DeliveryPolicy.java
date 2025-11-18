@@ -1,13 +1,13 @@
 package kr.kro.moonlightmoist.shopapi.policy.deliveryPolicy.domain;
 
 import jakarta.persistence.*;
+import kr.kro.moonlightmoist.shopapi.common.domain.BaseTimeEntity;
 import lombok.*;
 import org.hibernate.annotations.Check;
 
 import java.time.LocalDateTime;
 
 @Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @Entity
 @Check(constraints = "policy_type IN ('PAID','CONDITIONAL_FREE','FREE')")
 @Table(name = "delivery_policies")
-public class DeliveryPolicy {
+public class DeliveryPolicy extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -31,8 +31,5 @@ public class DeliveryPolicy {
     private boolean defaultPolicy;
     @Column(name = "is_deleted",nullable = false)
     private boolean deleted;
-    @Column(nullable = false)
-    private LocalDateTime createdAt;
-    @Column(nullable = true)
-    private LocalDateTime updatedAt;
+
 }

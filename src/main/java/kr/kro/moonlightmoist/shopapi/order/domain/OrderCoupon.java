@@ -1,6 +1,7 @@
 package kr.kro.moonlightmoist.shopapi.order.domain;
 
 import jakarta.persistence.*;
+import kr.kro.moonlightmoist.shopapi.common.domain.BaseTimeEntity;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -12,7 +13,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Entity
 @Table(name = "order_coupons")
-public class OrderCoupon {
+@AttributeOverride(name="createdAt", column = @Column(name = "applied_at",updatable = false,nullable = false))
+public class OrderCoupon extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,7 +28,5 @@ public class OrderCoupon {
     private String couponCode;
     @Column(nullable = false)
     private int discountAmount;
-    @Column(nullable = false)
-    private LocalDateTime appliedAt;
 
 }

@@ -1,6 +1,7 @@
 package kr.kro.moonlightmoist.shopapi.order.domain;
 
 import jakarta.persistence.*;
+import kr.kro.moonlightmoist.shopapi.common.domain.BaseTimeEntity;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -12,7 +13,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Entity
 @Table(name = "shipments")
-public class Shipment {//배송정보
+public class Shipment extends BaseTimeEntity {//배송정보
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,6 +28,5 @@ public class Shipment {//배송정보
     private LocalDateTime shippedAt;
     @Column(nullable = false)
     private LocalDateTime deliveredAt;
-    @Column(nullable = false)
-    private LocalDateTime createdAt;
+
 }

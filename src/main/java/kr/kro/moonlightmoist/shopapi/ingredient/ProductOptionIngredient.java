@@ -1,21 +1,20 @@
 package kr.kro.moonlightmoist.shopapi.ingredient;
 
 import jakarta.persistence.*;
+import kr.kro.moonlightmoist.shopapi.common.domain.BaseTimeEntity;
 import kr.kro.moonlightmoist.shopapi.product.domain.ProductOption;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Getter
 @ToString
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "product_option_ingredients")
-public class ProductOptionIngredient {
+public class ProductOptionIngredient extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -28,8 +27,5 @@ public class ProductOptionIngredient {
     @JoinColumn(name = "ingredient_id",nullable = false)
     private Ingredient ingredient;
 
-    @Column(nullable = false)
-    private LocalDateTime createdAt;
-    @Column(nullable = false)
-    private LocalDateTime updatedAt;
+
 }

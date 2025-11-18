@@ -1,6 +1,7 @@
 package kr.kro.moonlightmoist.shopapi.order.domain;
 
 import jakarta.persistence.*;
+import kr.kro.moonlightmoist.shopapi.common.domain.BaseTimeEntity;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -12,7 +13,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Entity
 @Table(name = "order_requests")
-public class OrderRequest {
+public class OrderRequest extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -28,8 +29,6 @@ public class OrderRequest {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private RequestStatus requestStatus;
-    @Column(nullable = false)
-    private LocalDateTime createdAt;
     @Column(nullable = true)
     private LocalDateTime processedAt;
 }

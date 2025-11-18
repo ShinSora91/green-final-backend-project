@@ -1,19 +1,19 @@
 package kr.kro.moonlightmoist.shopapi.address.domain;
 
 import jakarta.persistence.*;
+import kr.kro.moonlightmoist.shopapi.common.domain.BaseTimeEntity;
 import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Getter
-@Setter
 @Builder
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name="user_addresses")
-public class UserAddress {
+public class UserAddress extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -40,9 +40,6 @@ public class UserAddress {
 
     @Column(nullable = true)
     private String deliveryRequest;
-    @Column(nullable = false)
-    private LocalDateTime createdAt;
-    @Column(nullable = false)
-    private LocalDateTime updatedAt;
+
 
 }

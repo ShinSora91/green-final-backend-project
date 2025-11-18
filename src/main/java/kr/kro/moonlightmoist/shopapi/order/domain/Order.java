@@ -1,6 +1,7 @@
 package kr.kro.moonlightmoist.shopapi.order.domain;
 
 import jakarta.persistence.*;
+import kr.kro.moonlightmoist.shopapi.common.domain.BaseTimeEntity;
 import kr.kro.moonlightmoist.shopapi.policy.deliveryPolicy.domain.DeliveryPolicy;
 import lombok.*;
 import org.hibernate.annotations.Check;
@@ -16,7 +17,7 @@ import java.time.LocalDateTime;
 @Entity
 @Check(constraints = "payment_method IN ('CARD', 'BANK_TRANSFER', 'MOBILE', 'KAKAO_PAY', 'NAVER_PAY', 'PAYCO')")
 @Table(name="orders")
-public class Order {
+public class Order extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,7 +27,7 @@ public class Order {
 //    private User user;
     @Column(nullable = false)
     private String orderNumber;
-    @Column(name = "payment_method",nullable = false)
+    @Column(nullable = false)
     private String paymentMethod;
     @ManyToOne
     @JoinColumn(name="delivery_policy_id",nullable = true)
@@ -53,9 +54,5 @@ public class Order {
     private String detailedAddress;
     @Column(nullable = true)
     private String deliveryRequest;
-    @Column(nullable = false)
-    private LocalDateTime createdAt;
-    @Column(nullable = false)
-    private LocalDateTime updatedAt;
 
 }

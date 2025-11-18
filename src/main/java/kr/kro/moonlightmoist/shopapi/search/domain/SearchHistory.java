@@ -1,6 +1,7 @@
 package kr.kro.moonlightmoist.shopapi.search.domain;
 
 import jakarta.persistence.*;
+import kr.kro.moonlightmoist.shopapi.common.domain.BaseTimeEntity;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -10,10 +11,10 @@ import java.time.LocalDateTime;
 @ToString
 @Getter
 @Builder
-@Setter
 @Entity
 @Table(name="search_histories")
-public class SearchHistory {
+@AttributeOverride(name = "createdAt", column = @Column(name = "searched_at",updatable = false,nullable = false))
+public class SearchHistory extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,7 +25,5 @@ public class SearchHistory {
 //    private User user;
     @Column(nullable = false)
     private String keyword;
-    @Column(nullable = false)
-    private LocalDateTime searchedAt;
 
 }
