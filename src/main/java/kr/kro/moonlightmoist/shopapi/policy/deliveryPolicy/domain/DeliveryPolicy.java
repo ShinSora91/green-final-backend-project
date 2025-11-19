@@ -23,12 +23,16 @@ public class DeliveryPolicy extends BaseTimeEntity {
     private String name;
     @Column(name = "policy_type",nullable = false)
     private String policyType;
+    //기본 배송료
     @Column(nullable = false)
     private int basicDeliveryFee;
+    //배송료 무료 조건
     @Column(nullable = true)
     private int freeConditionAmount;
+    //기본 배송비 정책인지
     @Column(name = "is_default",nullable = false)
     private boolean defaultPolicy;
+    //삭제된 정책인지
     @Column(name = "is_deleted",nullable = false)
     private boolean deleted;
 
