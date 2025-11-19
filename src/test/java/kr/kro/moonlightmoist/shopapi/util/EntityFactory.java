@@ -2,6 +2,8 @@ package kr.kro.moonlightmoist.shopapi.util;
 
 import kr.kro.moonlightmoist.shopapi.brand.domain.Brand;
 import kr.kro.moonlightmoist.shopapi.category.domain.Category;
+import kr.kro.moonlightmoist.shopapi.helpcenter.domain.Faq;
+import kr.kro.moonlightmoist.shopapi.helpcenter.domain.InquiryType;
 import kr.kro.moonlightmoist.shopapi.product.domain.ExposureStatus;
 import kr.kro.moonlightmoist.shopapi.product.domain.Product;
 import kr.kro.moonlightmoist.shopapi.product.domain.ProductOption;
@@ -74,17 +76,13 @@ public class EntityFactory {
                 .build();
     }
 
-    public static ProductOption createProductOption (String name, Product product) {
-        return ProductOption.builder()
-                .product(product)
                 .optionName(name)
-                .purchasePrice(1000)
-                .sellingPrice(5000)
-                .currentStock(30)
-                .initialStock(50)
-                .safetyStock(10)
-                .imageUrl("url")
-                .displayOrder(1)
+    public static Faq createFaq (User user) {
+        return Faq.builder()
+                .user(user)
+                .inquiryType(InquiryType.ETC)
+                .title("결제가 되지않습니다")
+                .answer("재결제를 해보시길 권장드립니다")
                 .build();
     }
 
