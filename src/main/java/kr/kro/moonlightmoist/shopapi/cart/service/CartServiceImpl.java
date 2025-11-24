@@ -98,5 +98,11 @@ public class CartServiceImpl implements CartService{
         }
     }
 
+    @Override
+    public String removeAll() {
+        cartProductRepository.deleteAll();
+        return "장바구니 비우기 성공";
+    }
+
 
 }
