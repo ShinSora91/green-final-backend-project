@@ -5,6 +5,7 @@ import kr.kro.moonlightmoist.shopapi.cart.dto.CartProductListDTO;
 import kr.kro.moonlightmoist.shopapi.cart.service.CartService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -40,6 +41,11 @@ public class CartController {
     @DeleteMapping("/{cartProductId}")
     public List<CartProductListDTO> removeCartItem(@PathVariable Long cartProductId){
         return cartService.remove(cartProductId);
+    }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<String> removeCart() {
+        return ResponseEntity.ok(cartService.removeAll());
     }
 
 

@@ -13,4 +13,6 @@ public interface CartService {
     List<CartProductListDTO> remove(Long cartProductId);
     //user id를 받음
     List<CartProductListDTO> getCartItems(Long userId);
+    // 장바구니 전체 비우기
+    String removeAll();
 }
