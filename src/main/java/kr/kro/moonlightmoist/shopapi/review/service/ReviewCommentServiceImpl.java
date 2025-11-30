@@ -11,6 +11,7 @@ import kr.kro.moonlightmoist.shopapi.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Optional;
@@ -51,7 +52,7 @@ public class ReviewCommentServiceImpl implements ReviewCommentService {
   }
 
   @Override
-  public Long register(ReviewCommentDTO dto) {
+  public Long register(@RequestBody ReviewCommentDTO dto) {
 
     Review review = getReview(dto.getReviewId());
     User user = getUser();
