@@ -20,9 +20,9 @@ public class ReviewCommentController {
     private final ReviewCommentRepository reviewCommentRepository;
     private final ReviewCommentService reviewCommentService;
 
-    @GetMapping("/{commentId}")
-    public ResponseEntity<List<ReviewCommentDTO>> getList(@PathVariable("commentId") Long commentId) {
-      List<ReviewCommentDTO>  reviewComments = reviewCommentService.getList(commentId);
+    @GetMapping("/{reviewId}")
+    public ResponseEntity<List<ReviewCommentDTO>> getList(@PathVariable("reviewId") Long reviewId) {
+      List<ReviewCommentDTO>  reviewComments = reviewCommentService.getList(reviewId);
       return ResponseEntity.ok(reviewComments);
     }
 
