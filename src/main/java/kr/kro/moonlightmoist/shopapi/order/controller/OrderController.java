@@ -1,8 +1,10 @@
 package kr.kro.moonlightmoist.shopapi.order.controller;
 
+import kr.kro.moonlightmoist.shopapi.order.domain.OrderCoupon;
 import kr.kro.moonlightmoist.shopapi.order.dto.OrderProductRequestDTO;
 import kr.kro.moonlightmoist.shopapi.order.dto.OrderRequestDTO;
 import kr.kro.moonlightmoist.shopapi.order.dto.OrderResponseDTO;
+import kr.kro.moonlightmoist.shopapi.order.service.OrderCouponService;
 import kr.kro.moonlightmoist.shopapi.order.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +26,7 @@ import java.util.List;
 @RequestMapping("/api/order")
 public class OrderController {
     private final OrderService orderService;
+    private final OrderCouponService orderCouponService;
 
     @PostMapping("")
     public ResponseEntity<Long> registerOrder(@RequestBody OrderRequestDTO orderRequestDTO, @RequestParam Long userId) {

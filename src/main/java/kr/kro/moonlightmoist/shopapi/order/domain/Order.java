@@ -69,11 +69,17 @@ public class Order extends BaseTimeEntity {
     @Column(name = "is_deleted", nullable = false)
     private boolean deleted;
 
-//    @OneToOne
-//    private OrderCoupon orderCoupon;
+    // 조회 전용
+    @OneToOne
+    private OrderCoupon orderCoupon;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     @Builder.Default
     private List<OrderProduct> orderProducts = new ArrayList<>();
+
+    public void applyOrderCoupon(OrderCoupon orderCoupon) {
+        this.orderCoupon=orderCoupon;
+    }
+
 
 }
