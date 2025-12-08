@@ -1,6 +1,7 @@
 package kr.kro.moonlightmoist.shopapi.product.domain;
 
 import jakarta.persistence.*;
+import kr.kro.moonlightmoist.shopapi.common.domain.BaseTimeEntity;
 import kr.kro.moonlightmoist.shopapi.product.dto.DetailInfoDTO;
 import lombok.*;
 
@@ -11,7 +12,7 @@ import lombok.*;
 @Builder
 @Setter
 @Table(name = "product_detail_info")
-public class DetailInfo {
+public class DetailInfo extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

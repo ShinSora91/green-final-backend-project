@@ -44,7 +44,8 @@ public class ProductOption extends BaseTimeEntity {
     @Column(nullable = false)
     private int safetyStock;
 
-    @Column(nullable = true)
+    @Lob
+    @Column(nullable = true, columnDefinition = "LONGTEXT")
     private String imageUrl;
 
     @Column(nullable = true)

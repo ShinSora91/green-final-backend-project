@@ -2,6 +2,7 @@ package kr.kro.moonlightmoist.shopapi.product.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
+import jakarta.persistence.Lob;
 import kr.kro.moonlightmoist.shopapi.product.dto.ProductDetailImageDto;
 import lombok.*;
 
@@ -13,7 +14,8 @@ import lombok.*;
 @Getter
 public class ProductDetailImage {
 
-    @Column(nullable = false)
+    @Lob
+    @Column(nullable = false, columnDefinition = "LONGTEXT")
     private String imageUrl;
 
     @Column(nullable = false)

@@ -110,6 +110,7 @@ public class ProductServiceImpl implements ProductService{
 
         Page<Product> page = productRepository.findByCategoryIdIn(depth3CategoryIds, pageable);
         List<ProductResForList> result = page.get().map(product -> product.toDTOForList()).toList();
+        System.out.println("조회된 상품 갯수 = " + result.size());
         return result;
     }
 

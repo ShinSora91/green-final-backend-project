@@ -13,7 +13,8 @@ import lombok.*;
 @ToString
 public class ProductMainImage {
 
-    @Column(nullable = true)
+    @Lob
+    @Column(nullable = false, columnDefinition = "LONGTEXT")
     private String imageUrl;
 
     @Column(nullable = true)
