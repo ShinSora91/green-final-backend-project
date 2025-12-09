@@ -22,11 +22,21 @@ public interface PointHistoryRepository extends JpaRepository<PointHistory, Long
             @Param("now") LocalDateTime now
     );
 
-    // 누적 포인트
+    // 누적 포인트(사용안한것, 사용한것 다 포함) 조회 : 등급 업그레이드를 위한 쿼리
     @Query("SELECT COALESCE(SUM(p.pointValue), 0) FROM PointHistory p " +
             "WHERE p.user.id = :userId " +
             "AND p.pointStatus = 'EARNED'"
     )
     Long findCumulativePoints(@Param("userId") Long userId);
 
+    // 만료 대상 조회 : pointStatus 가 'EARNED' 이지만 만료기간이 지난 포인트히스토리 조회
+    @Query("SELECT p FROM PointHistory p " +
+            "WHERE p.pointStatus = 'EARNED' " +
+            "AND p.expiredAt <= :now " +
+            "AND p.deleted = false"
+    )
+    List<PointHistory> findExpiredPoints(@Param("now") LocalDateTime now);
+
+    // 포인트 만료 처리
+//    int updatePointStatusToExpired(@Param())
 }
