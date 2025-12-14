@@ -42,8 +42,8 @@ public class SecurityConfig {
                 // 특정 필터를 등록하는 역할
                 // 첫 번째 인자로 등록 필터를 전달하고, 두 번째 인자로 등록할 위치 전달
                 // UsernamePasswordAuthenticationFilter는 Spring Security에서 기본적으로 제공하는 폼 인증 처리 필터
-                .addFilterBefore(jwtAuthenticationFilter,
-                        UsernamePasswordAuthenticationFilter.class) // 이 필터보다 먼저 실행?
+                .addFilterBefore(jwtAuthenticationFilter, // 직접 만든 필터
+                        UsernamePasswordAuthenticationFilter.class) // 이 필터보다 먼저 실행
 
                 // 어떤 요청을 허용하고, 막을지를 설정하는 메서드
                 .authorizeHttpRequests(auth -> auth

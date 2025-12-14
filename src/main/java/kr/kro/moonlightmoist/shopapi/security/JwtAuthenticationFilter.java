@@ -1,5 +1,6 @@
 package kr.kro.moonlightmoist.shopapi.security;
 
+import com.google.gson.Gson;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -15,11 +16,12 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.Map;
 
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class JwtAuthenticationFilter extends OncePerRequestFilter {
+public class JwtAuthenticationFilter extends OncePerRequestFilter { // 상속
     // Spring이 제공하는 필터 기반 클래스
     // 요청당 딱 한 번만 실행을 보장 (중복 실행 방지)
     // doFilterInternal() 메서드 오버라이드
@@ -34,7 +36,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             HttpServletResponse response,
             FilterChain filterChain
     ) throws ServletException, IOException {
-        try {
+        try { // 인가를 할때 문제가 발생할 수 있기때문에 try-catch 사용
             // 요청 헤더에서 토큰 추출
             String jwt = getJwtFromRequest(request);
 
@@ -59,6 +61,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 // 요청정보를 Authentication에 추가해야한다.
                 authentication.setDetails(
                         new WebAuthenticationDetailsSource().buildDetails(request)
+                        // 보안규정 준수를 위한 기록하기 위한 로직.
+                        // 해당 로직은 비정상적인 접근에 대한 IP와 인증에 대한 로그를 저장하는기능과 같다.
                 );
 
 //                SecurityContextHolder에 저장
@@ -69,6 +73,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             }
         } catch(Exception e) {
           log.error("JWT 인증 처리 중 오류 발생 : ", e);
+          log.error(e.getMessage());
+
+          Gson gson = new Gson();
+          String message = gson.toJson(Map.of("error","ERROR_ACCESS_TOKEN"));
         }
 
         filterChain.doFilter(request,response);
