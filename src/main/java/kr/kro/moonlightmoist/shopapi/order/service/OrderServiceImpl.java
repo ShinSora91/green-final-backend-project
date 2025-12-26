@@ -289,7 +289,7 @@ public class OrderServiceImpl implements OrderService{
 
     @Override
     public void comfirmOrder(Long orderId) {
-        Order order = orderRepository.findById(orderId).get();
+        Order order = orderRepository.findById(orderId).orElseThrow(()->new RuntimeException("주문을 찾을 수 없습니다."));
         for(OrderProduct orderProduct : order.getOrderProducts()){
             // 판매량 증가
             Product product = orderProduct.getProductOption().getProduct();
@@ -301,7 +301,7 @@ public class OrderServiceImpl implements OrderService{
 
     @Override
     public void changeOrderProductStatus(Long orderId, OrderProductStatus status, String reason) {
-        Order order = orderRepository.findById(orderId).get();
+        Order order = orderRepository.findById(orderId).orElseThrow(()->new RuntimeException("주문을 찾을 수 없습니다."));
         for(OrderProduct orderProduct : order.getOrderProducts()) {
             orderProduct.updateStatus(status);
             if(status == OrderProductStatus.RETURN_REQUESTED) {
@@ -355,16 +355,5 @@ public class OrderServiceImpl implements OrderService{
         return orderSummary;
     }
 
-//    @Override
-//    @Transactional
-//    public void completeRefund(String merchantUid) {
-//        Order order = orderRepository.findByMerchantUid(merchantUid).orElseThrow(()->new EntityNotFoundException("주문을 찾을 수 없습니다."));
-//
-//       // 포인트 복구
-//
-//
-//        // 마지막 : 소프트 삭제(주문과 주문 상품)
-//        order.deleteOrder();
-//    }
 
 }

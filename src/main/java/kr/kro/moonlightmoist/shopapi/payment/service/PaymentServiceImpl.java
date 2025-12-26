@@ -101,7 +101,7 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     @Transactional
     public void refundOrder(Long orderId, String reason) throws Exception {
-        Order order = orderRepository.findById(orderId).get();
+        Order order = orderRepository.findById(orderId).orElseThrow(()->new RuntimeException("주문을 찾을 수 없습니다."));
 
         // 1. 사전 검증
         // 예외 발생 시 여기서 중단되므로 포트원 API를 호출하지 않음 (안전)
