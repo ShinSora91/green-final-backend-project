@@ -26,7 +26,7 @@ public class OrderCouponServiceImpl implements OrderCouponService{
     public int calcAndUseCoupon(int totalProductAmount, Long userCouponId) {
 //        log.info("OrderCouponServiceImpl -> userCouponId:{}",userCouponId);
         if(userCouponId != null) {
-            UserCoupon userCoupon = userCouponRepository.findById(userCouponId).get();
+            UserCoupon userCoupon = userCouponRepository.findById(userCouponId).orElseThrow(()->new RuntimeException("쿠폰을 찾을 수 없습니다."));
             Coupon coupon = userCoupon.getCoupon();
             // 최소 주문 금액 제한이 없거나 최소 주문 금액보다 더 많이 주문했을때
             if (!coupon.getLimitMinOrderAmount() || (coupon.getLimitMinOrderAmount() && (totalProductAmount >= coupon.getMinOrderAmount()))) {
@@ -50,8 +50,8 @@ public class OrderCouponServiceImpl implements OrderCouponService{
 
     @Override
     public Long saveCoupon(Long orderId, Long userCouponId, int discountAmount) {
-        Order order = orderRepository.findById(orderId).get();
-        UserCoupon userCoupon = userCouponRepository.findById(userCouponId).get();
+        Order order = orderRepository.findById(orderId).orElseThrow(()->new RuntimeException("주문을 찾을 수 없습니다."));
+        UserCoupon userCoupon = userCouponRepository.findById(userCouponId).orElseThrow(()->new RuntimeException("쿠폰을 찾을 수 없습니다."));
         OrderCoupon orderCoupon = OrderCoupon.builder()
                 .order(order)
                 .userCoupon(userCoupon)
@@ -65,7 +65,7 @@ public class OrderCouponServiceImpl implements OrderCouponService{
 
     @Override
     public void deleteOrderCoupon(Long orderCouponId) {
-        OrderCoupon orderCoupon = orderCouponRepository.findById(orderCouponId).get();
+        OrderCoupon orderCoupon = orderCouponRepository.findById(orderCouponId).orElseThrow(()->new RuntimeException("주문에 사용된 쿠폰을 찾을 수 없습니다."));
         orderCoupon.deleteOrderCoupon();
     }
 }

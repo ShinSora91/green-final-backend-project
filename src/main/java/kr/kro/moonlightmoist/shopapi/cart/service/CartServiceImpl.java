@@ -35,8 +35,7 @@ public class CartServiceImpl implements CartService{
         int quantity = dto.getQuantity();
 
         //CartProductDTO에 저장된 userId로 cart 조회
-        User user = userRepository.findById(userId).orElseThrow();
-//        Cart cart = cartRepository.findByOwner(user).orElseThrow();
+        User user = userRepository.findById(userId).orElseThrow(()->new RuntimeException("유저를 찾을 수 없습니다."));
         Optional<Cart> cartOptional = cartRepository.findByOwner(user);
 
         // 만약 장바구니가 생성되지 않았으면 먼저 장바구니부터 생성함
@@ -52,7 +51,7 @@ public class CartServiceImpl implements CartService{
 
         // 장바구니에서 수량 변경할 때는 id가 null이 아니다.
         if(id != null) {
-            CartProduct cartProduct = cartProductRepository.findById(id).orElseThrow();
+            CartProduct cartProduct = cartProductRepository.findById(id).orElseThrow(()-> new RuntimeException("장바구니 상품을 찾을 수 없습니다."));
             cartProduct.changeQty(quantity);
             cartProductRepository.save(cartProduct);
         }
@@ -60,7 +59,7 @@ public class CartServiceImpl implements CartService{
 
 
         if(id == null) {
-            ProductOption productOption = productOptionRepository.findById(productOptionId).orElseThrow();
+            ProductOption productOption = productOptionRepository.findById(productOptionId).orElseThrow(()->new RuntimeException("상품 옵션을 찾을 수 없습니다."));
             Optional<CartProduct> foundCartItem = cartProductRepository.getItemOfProductOptionIdAndUserId(userId, productOptionId);
             // 아직 장바구니 상품이 아닌 상품은 장바구니 상품으로 등록
             if(foundCartItem.isEmpty()) {
@@ -94,7 +93,7 @@ public class CartServiceImpl implements CartService{
 
     @Override
     public List<CartProductListDTO> getCartItems(Long userId) {
-        User user = userRepository.findById(userId).orElseThrow();
+        User user = userRepository.findById(userId).orElseThrow(()->new RuntimeException("유저를 찾을 수 없습니다."));
         Optional<Cart> cartOptional = cartRepository.findByOwner(user);
         if(cartOptional.isEmpty()){
             System.out.println("id " + userId + "번 회원의 장바구니가 없습니다.");
