@@ -167,7 +167,7 @@ public class ProductServiceImpl implements ProductService{
     @Override
     @Transactional(readOnly = true)
     public ProductResForDetail searchProductById(Long id) {
-        Product product = productRepository.findById(id).get();
+        Product product = productRepository.findById(id).orElseThrow(EntityNotFoundException::new);
         ProductResForDetail dto = product.toDTOForDetail();
         return dto;
     }
