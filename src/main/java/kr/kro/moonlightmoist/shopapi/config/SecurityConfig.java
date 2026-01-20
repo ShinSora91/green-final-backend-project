@@ -70,9 +70,10 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
 //        configuration.setAllowedOrigins(List.of("*"));
         configuration.setAllowedOrigins(List.of("http://localhost:5173",
-                "http://moonlight-village.shop",
-                "https://moonlight-village.shop"
+                "http://www.moonlight-village.shop",
+                "https://www.moonlight-village.shop"
                 ));
+//        https://www.moonlight-village.shop/
 //        configuration.setAllowedHeaders(List.of("Authorization", "Content-Type", "Accept"));
         configuration.setAllowedHeaders(List.of("*")); // 수정 BY 병국
         configuration.setAllowedMethods(List.of("GET","POST","PUT","DELETE","PATCH","OPTIONS")); // 허용 메서드
