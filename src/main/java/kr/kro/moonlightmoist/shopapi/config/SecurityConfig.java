@@ -70,8 +70,8 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
 //        configuration.setAllowedOrigins(List.of("*"));
         configuration.setAllowedOrigins(List.of("http://localhost:5173",
-                "http://www.moonlight-village.shop",
-                "https://www.moonlight-village.shop"
+                "http://moonlight-village.shop",
+                "https://moonlight-village.shop"
                 ));
 //        https://www.moonlight-village.shop/
 //        configuration.setAllowedHeaders(List.of("Authorization", "Content-Type", "Accept"));
